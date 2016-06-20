@@ -8,6 +8,7 @@ import (
   "flag"
   "strconv"
   "github.com/fatih/color"
+  "os"
 )
 
 type Page struct {
@@ -28,13 +29,19 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func getFileName(value string) string {
+  var result string
+
   if strings.Contains(value, ".") {
-    return value;
+    result = value;
   } else if value == "" || value == "/" {
-    return "index.html"
+    result = "index.html"
   } else {
-    return value + ".html"
+    result = value + ".html"
   }
+
+  path, _ := os.Getwd()
+
+  return  path + "/" + result
 }
 
 func setupFlags() int {
