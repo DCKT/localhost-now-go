@@ -12,7 +12,6 @@ import (
 )
 
 type Page struct {
-  Title string
   Url string
 }
 
@@ -24,7 +23,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
   if err != nil {
     fmt.Fprintf(w, "File %s not found", templateName)
   } else {
-    t.Execute(w, &Page{Title: "Accueil", Url: templateName})
+    t.Execute(w, &Page{Url: templateName})
   }
 }
 
